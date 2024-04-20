@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://chjjs4ohgme0r"]
+
+[ext_resource type="Script" path="res://addons/blocks/src/block_tile.gd" id="1_nmb82"]
+[ext_resource type="FontFile" uid="uid://h4rwu73f3arn" path="res://addons/blocks/utl/pixel_font.ttf" id="2_418m2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_df33t"]
+size = Vector2(64, 16)
+
+[sub_resource type="QuadMesh" id="QuadMesh_577ul"]
+size = Vector2(64, 16)
+
+[sub_resource type="QuadMesh" id="QuadMesh_tal1l"]
+size = Vector2(63, 15)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6wano"]
+font = ExtResource("2_418m2")
+font_size = 22
+
+[node name="Cube16x64" type="Node2D"]
+script = ExtResource("1_nmb82")
+
+[node name="StaticBody" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody"]
+position = Vector2(32, -8)
+shape = SubResource("RectangleShape2D_df33t")
+
+[node name="BorderMesh" type="MeshInstance2D" parent="."]
+modulate = Color(0.054902, 0.0745098, 0.0745098, 1)
+position = Vector2(32, -8)
+mesh = SubResource("QuadMesh_577ul")
+
+[node name="Mesh" type="MeshInstance2D" parent="."]
+modulate = Color(0.32549, 0.380392, 0.384314, 1)
+position = Vector2(32, -8)
+mesh = SubResource("QuadMesh_tal1l")
+
+[node name="Labels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -16.0
+offset_right = 366.0
+offset_bottom = 76.0
+scale = Vector2(0.175, 0.175)
+
+[node name="NumLabelA" type="MarginContainer" parent="Labels"]
+layout_mode = 1
+offset_right = 18.0
+offset_bottom = 25.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = -6
+
+[node name="Label" type="Label" parent="Labels/NumLabelA"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "16"
+label_settings = SubResource("LabelSettings_6wano")
+
+[node name="NumLabelB" type="MarginContainer" parent="Labels"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = -5
+
+[node name="Label" type="Label" parent="Labels/NumLabelB"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "64"
+label_settings = SubResource("LabelSettings_6wano")
+
+[node name="NumLabelC" type="MarginContainer" parent="Labels"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 20.0
+grow_vertical = 0
+theme_override_constants/margin_bottom = -5
+
+[node name="Label" type="Label" parent="Labels/NumLabelC"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "X"
+label_settings = SubResource("LabelSettings_6wano")

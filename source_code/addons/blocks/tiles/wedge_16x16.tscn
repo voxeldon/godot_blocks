@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://bf5mi8fgqgqf0"]
+
+[ext_resource type="Script" path="res://addons/blocks/src/block_tile.gd" id="1_2rehq"]
+[ext_resource type="FontFile" uid="uid://h4rwu73f3arn" path="res://addons/blocks/utl/pixel_font.ttf" id="2_jvn5h"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ibhi5"]
+left_to_right = 1.0
+size = Vector3(16, -16, 0)
+
+[sub_resource type="PrismMesh" id="PrismMesh_wyupf"]
+left_to_right = 1.0
+size = Vector3(15, -15, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kjp3u"]
+font = ExtResource("2_jvn5h")
+font_size = 22
+
+[node name="Wedge16x16" type="Node2D"]
+script = ExtResource("1_2rehq")
+
+[node name="StaticBody" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody"]
+polygon = PackedVector2Array(0, 0, 16, 0, 16, -16)
+
+[node name="BorderMesh" type="MeshInstance2D" parent="."]
+modulate = Color(0.0591037, 0.076942, 0.0782215, 1)
+position = Vector2(8, -8)
+mesh = SubResource("PrismMesh_ibhi5")
+
+[node name="Mesh" type="MeshInstance2D" parent="."]
+modulate = Color(0.32549, 0.380392, 0.384314, 1)
+position = Vector2(8.3, -7.65)
+scale = Vector2(0.966667, 0.966667)
+mesh = SubResource("PrismMesh_wyupf")
+
+[node name="Labels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -16.0
+offset_right = 91.4
+offset_bottom = 75.3
+scale = Vector2(0.175, 0.175)
+
+[node name="NumLabel" type="MarginContainer" parent="Labels"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_bottom = -5
+
+[node name="Label" type="Label" parent="Labels/NumLabel"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "16"
+label_settings = SubResource("LabelSettings_kjp3u")
+
+[node name="NumLabelC" type="MarginContainer" parent="Labels"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 20.0
+grow_vertical = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_bottom = -5
+
+[node name="Label" type="Label" parent="Labels/NumLabelC"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "X"
+label_settings = SubResource("LabelSettings_kjp3u")
