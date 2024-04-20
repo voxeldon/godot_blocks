@@ -18,9 +18,11 @@ func _ready() -> void:
 	_collider = BlockDef.get_collider(self)
 
 func _update_color() -> void:
+	if !_mesh_instance: return
 	_mesh_instance.modulate = _mesh_color
 
 func _update_collision_layers(layer_value: Variant, mask_value: Variant) -> void:
+	if !_static_body: return
 	for i in range(1, 33): 
 		if layer_value:
 			_static_body.set_collision_layer_value(i, (layer_value & (1 << (i - 1))) != 0)
@@ -33,6 +35,7 @@ func _disable_all_collision_layers() -> void:
 		_static_body.set_collision_mask_value(i, false)
 
 func _update_oneway_collision(_collision_type_id: int):
+	if !_collider: return
 	var is_oneway: bool
 	if _collision_type_id == Block.CollisionType.ONEWAY: is_oneway = true
 	else: is_oneway = false
@@ -45,6 +48,7 @@ func _update_oneway_collision(_collision_type_id: int):
 		_collider.one_way_collision = is_oneway
 		
 func _update_icon(_collision_type_id: int):
+	if !_mesh_instance: return
 	if _collision_type_id == Block.CollisionType.CLIMBABLE:
 		_mesh_instance.texture = _LADDER_ICON
 	else:

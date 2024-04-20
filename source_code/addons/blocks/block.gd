@@ -96,8 +96,9 @@ enum CollisionType {UNKNOWN, SOLID, FLUID, LEDGE, ONEWAY, CLIMBABLE, GRABBABLE, 
 static var blocks: Array = []
 
 func _enter_tree() -> void:
-	for child in get_children():
-		if child: remove_child(child)	
+	if _block_instance:
+		for child in get_children():
+			if child == _block_instance: remove_child(child)	
 	_update_block()
 	blocks.append(self)
 	
@@ -126,7 +127,7 @@ func _set_properties() -> void:
 
 func _update_block() -> void:
 	for child in get_children():
-		if child: remove_child(child)
+		if child == _block_instance: remove_child(child)
 	if block_type == "Cube": 
 		if dimensions == "16x16":
 			_block_size = Vector2(16,16)
